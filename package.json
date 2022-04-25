@@ -1,0 +1,11 @@
+{
+  "name": "PersonalBudget",
+  "version": "1.0.0",
+  "scripts": {
+    "start": "lerna run start --stream"
+  },
+  "author": "Linamikaela21",
+  "devDependencies": {
+    "lerna": "^4.0.0"
+  }
+}
