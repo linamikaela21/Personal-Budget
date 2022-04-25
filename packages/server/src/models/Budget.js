@@ -24,6 +24,12 @@ const budgetSchema = new mongoose.Schema(
       min: 3,
       max: 20,
     },
+    type: {
+      type: String,
+      enum: ["income", "outflow"],
+      required: true,
+      trim: true,
+    },
     date: {
       type: String,
       required: true,

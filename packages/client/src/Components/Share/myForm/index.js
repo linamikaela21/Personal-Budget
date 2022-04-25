@@ -11,6 +11,7 @@ export const MyForm = ({ onHide }) => {
     concept: yup.string().required(),
     amount: yup.number().required(),
     category: yup.string().required(),
+    type: yup.string().required(),
   });
 
   return (
@@ -27,6 +28,7 @@ export const MyForm = ({ onHide }) => {
         concept: "",
         amount: "",
         category: "",
+        type: "",
       }}
     >
       {({
@@ -114,6 +116,43 @@ export const MyForm = ({ onHide }) => {
               ) : null}
             </Col>
           </Form.Group>
+
+          <Form.Group as={Row} className="mb-3">
+            <Form.Label column sm="2">
+              Type
+            </Form.Label>
+            <Col sm="10">
+              <Form.Control
+                as="select"
+                size="lg"
+                required
+                type="radio"
+                name="type"
+                value={values.type}
+                onChange={handleChange}
+                isInvalid={!!errors.type}
+                errors={errors.type}
+                onBlur={handleBlur}
+                className={touched.type && errors.type ? "bg-danger" : null}
+              >
+                <option
+                  name="outflow"
+                  value="outflow"
+                  selected="selected"
+                  className="w-100"
+                >
+                  Outflow
+                </option>
+                <option name="income" value="income">
+                  Income
+                </option>
+              </Form.Control>
+              {touched.type && errors.type ? (
+                <div className="bg-danger">{errors.type}</div>
+              ) : null}
+            </Col>
+          </Form.Group>
+
           <div className="d-flex justify-content-center align-items-center">
             <Button
               size="lg"
