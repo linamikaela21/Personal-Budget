@@ -28,7 +28,7 @@ export const CardBox = ({ operation }) => {
               ? `$ ${operation.amount}`
               : `- $ ${operation.amount}`}
           </h5>
-          <Button variant="danger" onClick={deleteOp(operation._id)}>
+          <Button variant="danger" onClick={() => deleteOp(operation._id)}>
             x
           </Button>
         </Card.Title>
