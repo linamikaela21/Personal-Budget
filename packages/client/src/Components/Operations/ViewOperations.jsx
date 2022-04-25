@@ -1,19 +1,29 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { Row, Container } from 'react-bootstrap';
+import React from "react";
+import PropTypes from "prop-types";
+import { Row, Container, Col } from "react-bootstrap";
+import { CardBox } from "../Share/CardBox";
 
-export const ViewOperations = ({
-  operations,
-}) => {
+export const ViewOperations = ({ operations }) => {
   return (
-    <Container data-testid="test-id-view-operations">
-        <Row xs={1} md={2} lg={4}>
-          {operations?.map((op) => {
-            return (
-<h1 key={op._id} >{op.concept}</h1>
-            );
-          })}
-        </Row>
+    <Container
+      data-testid="test-id-view-operations"
+      className="w-100"
+    >
+      <Col className="d-block" style={{ left: "13%" }}>
+        {operations?.map((op) => {
+          return (
+            <Row
+              xs={1}
+              md={1}
+              lg={1}
+              key={op._id}
+              className="w-75 m-2"
+            >
+              <CardBox operation={op} />
+            </Row>
+          );
+        })}
+      </Col>
     </Container>
   );
 };

@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 
 const budgetSchema = new mongoose.Schema(
   {
-    id: { type: String, required: true },
+    id: { type: String },
     concept: {
       type: String,
       required: true,
