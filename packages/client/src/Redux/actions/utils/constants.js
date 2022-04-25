@@ -1,4 +1,3 @@
 export const GET_OPERATIONS = 'GET_OPERATIONS';
-export const ADD_OPERATIONS = 'ADD_OPERATIONS';
-export const SING_IN = 'SING_IN';
-export const SING_UP = 'SING_UP';
+export const DELETE_OPERATION = 'DELETE_OPERATION';
+export const ADD_OPERATION = 'ADD_OPERATION';

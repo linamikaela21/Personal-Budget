@@ -21,18 +21,19 @@ export const CardBox = ({ operation }) => {
         </h5>
       </Card.Header>
       <Card.Body>
-        <Card.Title className="d-flex justify-content-around">
+        <Card.Title className="d-flex justify-content-around text-capitalize">
           <h5>{operation.concept}</h5>
           <h5>
             {operation.category === "income"
               ? `$ ${operation.amount}`
               : `- $ ${operation.amount}`}
           </h5>
-          <Button variant="danger" onClick={() => deleteOp(operation._id)}>
+          <Button variant="danger text-capitalize" onClick={() => deleteOp(operation._id)}>
             x
           </Button>
         </Card.Title>
       </Card.Body>
+      <Card.Footer className="d-flex justify-content-center">{operation.date}</Card.Footer>
     </Card>
   );
 };

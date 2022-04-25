@@ -7,8 +7,8 @@ import { Pag } from "../Share/Pagination";
 export const ViewOperations = ({
   operations,
   setCurrentPage,
-  currentPage,
-  itemsPerPage = 2,
+  currentPage = 1,
+  itemsPerPage = 10,
 }) => {
   const indexLastItem = currentPage * itemsPerPage;
   const indexFirstItem = indexLastItem - itemsPerPage;
@@ -18,7 +18,7 @@ export const ViewOperations = ({
 
   return (
     <Container data-testid="test-id-view-operations bg-dark" className="w-100">
-      <Row className="d-block bg-info" style={{ left: "12%" }}>
+      <Row className="d-block" style={{ paddingLeft: "20%" }}>
         {currentItems?.map((op) => {
           return (
             <Row xs={1} md={1} lg={1} key={op._id} className="w-75 m-2">
@@ -27,12 +27,12 @@ export const ViewOperations = ({
           );
         })}
       </Row>
-        <Pag
-          currentPage={currentPage}
-          itemsPerPage={itemsPerPage}
-          allItems={operations.length}
-          paginationCallback={paginationCallback}
-        />
+      <Pag
+        currentPage={currentPage}
+        itemsPerPage={itemsPerPage}
+        allItems={operations.length}
+        paginationCallback={paginationCallback}
+      />
     </Container>
   );
 };

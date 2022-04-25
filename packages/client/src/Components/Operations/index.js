@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux'
 import { ViewOperations } from './ViewOperations';
 import { getOperations } from '../../Redux/actions/operationsActions';
+import { Header } from '../Header';
 
 export const Operations = () => {
   const dispatch = useDispatch()
@@ -14,6 +15,7 @@ export const Operations = () => {
   
   return (
     <div data-testid="test-id-products">
+      <Header />
       <ViewOperations
         currentPage={currentPage}
         setCurrentPage={setCurrentPage}

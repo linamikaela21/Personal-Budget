@@ -23,7 +23,10 @@ export const Pag = ({
       {pageNumbers?.map((number) => (
         <Col lg={1} key={number}>
           <Pagination size="lg" onClick={() => paginationCallback(number)}>
-            <Pagination.Item className="border rounded border-primary">
+            <Pagination.Item
+              //active={currentPage === number}
+              className="border rounded border-primary"
+            >
               {number}
             </Pagination.Item>
           </Pagination>
