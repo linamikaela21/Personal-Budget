@@ -1,7 +1,16 @@
 import React from "react";
-import { Card } from "react-bootstrap";
+import { useDispatch } from "react-redux";
+import { Button, Card } from "react-bootstrap";
+import { deleteOperation } from "../../../Redux/actions/operationsActions";
 
 export const CardBox = ({ operation }) => {
+  const dispatch = useDispatch();
+
+  const deleteOp = (id) => {
+    dispatch(deleteOperation(id));
+    window.location.reload()
+  };
+
   return (
     <Card border={operation.category === "income" ? "success" : "danger"}>
       <Card.Header
@@ -19,6 +28,9 @@ export const CardBox = ({ operation }) => {
               ? `$ ${operation.amount}`
               : `- $ ${operation.amount}`}
           </h5>
+          <Button variant="danger" onClick={deleteOp(operation._id)}>
+            x
+          </Button>
         </Card.Title>
       </Card.Body>
     </Card>
