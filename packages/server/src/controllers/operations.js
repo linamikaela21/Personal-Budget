@@ -13,7 +13,22 @@ exports.newOperation = async (req, res) => {
           console.log(err);
       }
       else {
-        res.status(201).send(newBudget) 
+        res.status(201).send(data) 
       }
   });
 };
+
+exports.deleteOperation = async (req, res) => {
+  const { _id } = req.params
+  console.log(_id);
+      Budget.findByIdAndDelete(_id, 
+    (err, data) => {
+        if(err){
+            console.log(err);
+        }
+        else{
+            res.status(200).send(data);
+            console.log("Data Deleted!");
+        }
+    });  
+}

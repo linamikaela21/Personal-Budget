@@ -4,5 +4,6 @@ const { getOperations, newOperation } = require('../../controllers/operations')
 
 router.get('/budget', getOperations)
 router.post('/budget', newOperation)
+router.delete('/budget', newOperation)
 
 module.exports = router
