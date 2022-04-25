@@ -1,9 +1,11 @@
 const express = require('express')
 const router = express.Router()
-const { getOperations, newOperation } = require('../../controllers/operations')
+const { getOperations, newOperation, deleteOperation, updateOperation, getOperationById } = require('../../controllers/operations')
 
-router.get('/budget', getOperations)
-router.post('/budget', newOperation)
-router.delete('/budget', newOperation)
+router.get('/', getOperations)
+router.get('/:id', getOperationById)
+router.post('/', newOperation)
+router.delete('/:id', deleteOperation)
+router.post('/:id', updateOperation)
 
 module.exports = router

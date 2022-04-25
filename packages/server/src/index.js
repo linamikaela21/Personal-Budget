@@ -19,7 +19,7 @@ mongoose.connect(connectionString, {
 
 app.use(express.json())
 
-app.use('/', operationsRoutes)
+app.use('/budget', operationsRoutes)
 
 app.listen(process.env.PORT, () => {
     console.log(`Server running on port ${process.env.PORT}`)
