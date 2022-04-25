@@ -13,7 +13,7 @@ const budgetSchema = new mongoose.Schema({
         required: true,
         trim: true,
         min: 1,
-        max: 5
+        max: 1000000
     },
     category: {
         type: String,
