@@ -38,7 +38,7 @@ export const CardBox = ({
           operation.type === "income" ? "bg-success" : "bg-danger"
         } d-flex justify-content-around text-capitalize`}
       >
-        <h5 className="fw-bold text-center">
+        <h5 className="fw-bold text-center text-white">
           {operation.category.toUpperCase()} ({operation.type.toUpperCase()})
         </h5>
       </Card.Header>

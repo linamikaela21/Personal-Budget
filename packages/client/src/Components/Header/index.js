@@ -26,7 +26,10 @@ export const Header = ({ setModalShow, modalShow, setUpdate }) => {
           <GiSaveArrow size={32} className="m-2 mb-3" />
         </Button>
         <MyModal show={modalShow} setModalShow={setModalShow} />
-        <Button>Add Operation</Button>
+        <Navbar.Brand href="/" className="fw-bolder fs-3">
+          Personal Budget
+          <FaMoneyBillWave size={40} className="m-3 mb-3" />
+        </Navbar.Brand>
       </Container>
     </Navbar>
   );
