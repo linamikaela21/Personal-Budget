@@ -1,8 +1,10 @@
 import { URL_ALL_OPERATIONS } from "./urlConstants";
 import {
   GET_OPERATIONS,
+  GET_OPERATION_BY_ID,
   DELETE_OPERATION,
   ADD_OPERATION,
+  UPDATE_OPERATION,
 } from "./utils/constants";
 import { fetchData } from "./fetch";
 
@@ -10,6 +12,15 @@ export const getOperations = () => async (dispatch) => {
   try {
     const operations = await fetchData(URL_ALL_OPERATIONS, "get");
     return dispatch({ type: GET_OPERATIONS, payload: operations });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const getOperationById = (id) => async (dispatch) => {
+  try {
+    const operation = await fetchData(`${URL_ALL_OPERATIONS}/${id}`, "get");
+    return dispatch({ type: GET_OPERATION_BY_ID, payload: operation });
   } catch (error) {
     console.log(error);
   }
@@ -35,6 +46,27 @@ export const addOperation = (operation) => async (dispatch) => {
       body: JSON.stringify(operation),
     });
     return dispatch({ type: ADD_OPERATION, payload: operations });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const updateOperation = (operation) => async (dispatch) => {
+  console.log(operation);
+  try {
+    console.log("updateOperationACTION", operation._id, operation);
+    // const updateOperation = await fetch(
+    //   `${URL_ALL_OPERATIONS}/${operation._id}`,
+    //   {
+    //     headers: {
+    //       Accept: "application/json",
+    //       "Content-Type": "application/json",
+    //     },
+    //     method: "POST",
+    //     body: JSON.stringify(operation),
+    //   }
+    // );
+   // return dispatch({ type: UPDATE_OPERATION, payload: updateOperation });
   } catch (error) {
     console.log(error);
   }

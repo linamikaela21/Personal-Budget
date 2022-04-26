@@ -1,11 +1,9 @@
-import { useState } from "react";
 import { Navbar, Container, Button } from "react-bootstrap";
 import { FaMoneyBillWave } from "react-icons/fa";
 import { GiSaveArrow } from "react-icons/gi";
 import { MyModal } from "../Share/myModal";
 
-export const Header = () => {
-  const [modalShow, setModalShow] = useState(false);
+export const Header = ({ setModalShow, modalShow, setUpdate }) => {
   return (
     <Navbar
       bg="light"
@@ -18,11 +16,16 @@ export const Header = () => {
           <FaMoneyBillWave size={40} className="m-3 mb-3" />
           Personal Budget
         </Navbar.Brand>
-        <Button onClick={() => setModalShow(true)}>
+        <Button
+          onClick={() => {
+            setModalShow(true);
+            setUpdate(false);
+          }}
+        >
           Add Operation
           <GiSaveArrow size={32} className="m-2 mb-3" />
         </Button>
-        <MyModal show={modalShow} onHide={() => setModalShow(false)} />
+        <MyModal show={modalShow} setModalShow={setModalShow} />
         <Button>Add Operation</Button>
       </Container>
     </Navbar>

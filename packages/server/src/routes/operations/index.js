@@ -3,6 +3,7 @@ const router = express.Router()
 const { getOperations, newOperation, deleteOperation, updateOperation, getOperationById } = require('../../controllers/operations')
 
 router.get('/', getOperations)
+router.get('/:id', getOperationById)
 router.post('/', newOperation)
 router.delete('/:id', deleteOperation)
 router.post('/:id', updateOperation)

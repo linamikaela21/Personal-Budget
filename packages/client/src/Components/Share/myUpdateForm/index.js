@@ -3,33 +3,42 @@ import { useDispatch } from "react-redux";
 import { Form, Col, Row, Button } from "react-bootstrap";
 import * as yup from "yup";
 import { Formik } from "formik";
-import { addOperation } from "../../../Redux/actions/operationsActions";
+import { updateOperation } from "../../../Redux/actions/operationsActions";
 
-export const MyForm = ({ onHide }) => {
+export const MyUpdateForm = ({
+  onHide,
+  operationCategory,
+  operationConcept,
+  operationAmount,
+  operationId,
+  operationType
+}) => {
   const dispatch = useDispatch();
   const schema = yup.object().shape({
-    concept: yup.string().required(),
-    amount: yup.number().required(),
-    category: yup.string().required(),
-    type: yup.string().required(),
+    concept: yup.string('Concept should be a frase').required('Concept is required'),
+    amount: yup.number('Amount should be a number').required('Amount is required').min(1).max(1000000),
+    category: yup.string('Category should be a frase').required('Category is required'),
+    type: yup.string('Type should be a income or outflow').required('Type is required'),
   });
 
+  console.log("operation ===>>", operationConcept);
   return (
     <Formik
       validationSchema={schema}
       onSubmit={async (values, { setSubmitting, resetForm }) => {
         setSubmitting(true);
-        dispatch(addOperation(values));
+        console.log('valuessssssss', values);
+        dispatch(updateOperation(operationId, values));
         resetForm();
         setSubmitting(false);
         window.location.reload();
       }}
       initialValues={{
-        concept: "",
-        amount: "",
-        category: "",
-        type: "",
+        concept: operationConcept,
+        amount: operationAmount,
+        category: operationCategory,
       }}
+      enableReinitialize
     >
       {({
         handleSubmit,
@@ -41,6 +50,7 @@ export const MyForm = ({ onHide }) => {
         isSubmitting,
       }) => (
         <Form onSubmit={handleSubmit}>
+          {console.log(values)}
           <Form.Group as={Row} className="mb-3">
             <Form.Label column sm="2">
               Concept
@@ -57,12 +67,9 @@ export const MyForm = ({ onHide }) => {
                 isInvalid={!!errors.concept}
                 errors={errors.concept}
                 onBlur={handleBlur}
-                className={
-                  touched.concept && errors.concept ? "bg-danger" : null
-                }
               />
               {touched.concept && errors.concept ? (
-                <div className="bg-danger">{errors.concept}</div>
+                <div className="bg-danger text-white p-2 mt-1">{errors.concept}</div>
               ) : null}
             </Col>
           </Form.Group>
@@ -83,10 +90,9 @@ export const MyForm = ({ onHide }) => {
                 isInvalid={!!errors.amount}
                 errors={errors.amount}
                 onBlur={handleBlur}
-                className={touched.amount && errors.amount ? "bg-danger" : null}
               />
               {touched.amount && errors.amount ? (
-                <div className="bg-danger">{errors.amount}</div>
+                <div className="bg-danger text-white p-2 mt-1">{errors.amount}</div>
               ) : null}
             </Col>
           </Form.Group>
@@ -107,12 +113,9 @@ export const MyForm = ({ onHide }) => {
                 isInvalid={!!errors.category}
                 errors={errors.category}
                 onBlur={handleBlur}
-                className={
-                  touched.category && errors.category ? "bg-danger" : null
-                }
               />
               {touched.category && errors.category ? (
-                <div className="bg-danger">{errors.category}</div>
+                <div className="bg-danger text-white p-2 mt-1">{errors.category}</div>
               ) : null}
             </Col>
           </Form.Group>
@@ -122,34 +125,9 @@ export const MyForm = ({ onHide }) => {
               Type
             </Form.Label>
             <Col sm="10">
-              <Form.Control
-                as="select"
-                size="lg"
-                required
-                type="radio"
-                name="type"
-                value={values.type}
-                onChange={handleChange}
-                isInvalid={!!errors.type}
-                errors={errors.type}
-                onBlur={handleBlur}
-                className={touched.type && errors.type ? "bg-danger" : null}
-              >
-                <option
-                  name="outflow"
-                  value="outflow"
-                  selected="selected"
-                  className="w-100"
-                >
-                  Outflow
-                </option>
-                <option name="income" value="income">
-                  Income
-                </option>
+              <Form.Control as="select" size="lg" defaultValue={operationType}>
+                <option>Outflow</option>
               </Form.Control>
-              {touched.type && errors.type ? (
-                <div className="bg-danger">{errors.type}</div>
-              ) : null}
             </Col>
           </Form.Group>
 

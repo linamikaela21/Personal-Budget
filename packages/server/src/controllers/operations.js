@@ -5,6 +5,17 @@ exports.getOperations = async (req, res) => {
   res.status(200).send(budget);
 };
 
+exports.getOperationById = async (req, res) => {
+  const { id } = req.params;
+  Budget.findOne({_id: id}, (err, data) => {
+    if (err) {
+      console.log(err);
+    } else {
+      res.send(data);
+    }
+  });
+};
+
 exports.newOperation = async (req, res) => {
   const { concept, amount, category, type } = req.body;
   const newBudget = await new Budget({
@@ -37,6 +48,7 @@ exports.deleteOperation = async (req, res) => {
 exports.updateOperation = async (req, res) => {
   const { id } = req.params;
   const { amount, concept, category } = req.body;
+  console.log('SERVER', id, amount, concept, category);
   Budget.findByIdAndUpdate(
     id,
     { amount, concept, category },
@@ -44,7 +56,7 @@ exports.updateOperation = async (req, res) => {
       if (err) {
         console.log(err);
       } else {
-        res.status(200).send(`Data updated ! ${data}`);
+        res.status(200).send('Data updated !');
       }
     }
   );
