@@ -5,6 +5,7 @@ import {
   DELETE_OPERATION,
   ADD_OPERATION,
   UPDATE_OPERATION,
+  FILTER_BY_TYPE
 } from "./utils/constants";
 import { fetchData } from "./fetch";
 
@@ -71,3 +72,10 @@ export const updateOperation = (operation) => async (dispatch) => {
     console.log(error);
   }
 };
+
+export const filterProductsByType = (OperationType) => {
+  return {
+    type: FILTER_BY_TYPE,
+    payload: OperationType
+  };
+}

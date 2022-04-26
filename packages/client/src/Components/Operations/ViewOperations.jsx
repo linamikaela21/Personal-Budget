@@ -6,6 +6,7 @@ import { Pag } from "../Share/Pagination";
 
 export const ViewOperations = ({
   operations,
+  operationFiltered,
   setCurrentPage,
   setModalShow,
   modalShow,
@@ -17,7 +18,7 @@ export const ViewOperations = ({
   const [total, setTotal] = useState(0);
   const indexLastItem = currentPage * itemsPerPage;
   const indexFirstItem = indexLastItem - itemsPerPage;
-  const currentItems = operations.slice(indexFirstItem, indexLastItem);
+  const currentItems = operationFiltered.length ? operationFiltered.slice(indexFirstItem, indexLastItem) : operations.slice(indexFirstItem, indexLastItem);
 
   const paginationCallback = (pageNumber) => setCurrentPage(pageNumber);
   
@@ -28,14 +29,14 @@ export const ViewOperations = ({
 
   useEffect(() => {
     setTotal(
-      currentItems.reduce(
+      operations.reduce(
         (accQuantity, operation) =>
           accQuantity +
           (operation.type === "income" ? operation.amount : -operation.amount),
         0
       )
     );
-  }, [currentItems]);
+  }, [operations]);
 
   return (
     <Container data-testid="test-id-view-operations bg-dark" className="w-100">

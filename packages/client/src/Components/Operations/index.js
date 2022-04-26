@@ -7,6 +7,7 @@ import { Header } from "../Header";
 export const Operations = () => {
   const dispatch = useDispatch();
   const operations = useSelector((state) => state.operations);
+  const operationFiltered = useSelector((state) => state.operationFiltered);
   const [currentPage, setCurrentPage] = useState(1);
   const [modalShow, setModalShow] = useState(false);
   const [update, setUpdate] = useState(false);
@@ -22,8 +23,10 @@ export const Operations = () => {
         setModalShow={setModalShow}
         update={update}
         setUpdate={setUpdate}
+        setCurrentPage={setCurrentPage}
       />
       <ViewOperations
+        operationFiltered={operationFiltered}
         currentPage={currentPage}
         setCurrentPage={setCurrentPage}
         operations={operations}

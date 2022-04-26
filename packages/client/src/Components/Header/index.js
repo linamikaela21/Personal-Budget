@@ -1,9 +1,10 @@
 import { Navbar, Container, Button } from "react-bootstrap";
 import { FaMoneyBillWave } from "react-icons/fa";
 import { GiSaveArrow } from "react-icons/gi";
+import { Filter } from "../Share/Filter";
 import { MyModal } from "../Share/myModal";
 
-export const Header = ({ setModalShow, modalShow, setUpdate }) => {
+export const Header = ({ setModalShow, modalShow, setUpdate, setCurrentPage }) => {
   return (
     <Navbar
       bg="light"
@@ -26,10 +27,7 @@ export const Header = ({ setModalShow, modalShow, setUpdate }) => {
           <GiSaveArrow size={32} className="m-2 mb-3" />
         </Button>
         <MyModal show={modalShow} setModalShow={setModalShow} />
-        <Navbar.Brand href="/" className="fw-bolder fs-3">
-          Personal Budget
-          <FaMoneyBillWave size={40} className="m-3 mb-3" />
-        </Navbar.Brand>
+        <Filter setCurrentPage={setCurrentPage} />
       </Container>
     </Navbar>
   );
