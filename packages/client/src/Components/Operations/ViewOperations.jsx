@@ -45,6 +45,7 @@ export const ViewOperations = ({
             <Row xs={1} md={1} lg={1} key={op._id} className="w-75 m-2">
               <CardBox
                 operation={op}
+                formatter={formatter}
                 modalShow={modalShow}
                 setModalShow={setModalShow}
                 update={update}

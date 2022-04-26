@@ -15,6 +15,7 @@ export const CardBox = ({
   setModalShow,
   update,
   setUpdate,
+  formatter
 }) => {
   const dispatch = useDispatch();
   const op = useSelector((state) => state.operation);
@@ -46,8 +47,8 @@ export const CardBox = ({
           <h5>{operation.concept}</h5>
           <h5>
             {operation.type === "income"
-              ? `$ ${operation.amount}`
-              : `- $ ${operation.amount}`}
+              ? `${formatter.format(operation.amount)}`
+              : `- ${formatter.format(operation.amount)}`}
           </h5>
           <div>
             <Button
