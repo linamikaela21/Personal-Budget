@@ -20,6 +20,11 @@ export const ViewOperations = ({
   const currentItems = operations.slice(indexFirstItem, indexLastItem);
 
   const paginationCallback = (pageNumber) => setCurrentPage(pageNumber);
+  
+  const formatter = new Intl.NumberFormat('en-US', {
+    style: 'currency',
+    currency: 'USD',
+  });
 
   useEffect(() => {
     setTotal(
@@ -50,7 +55,7 @@ export const ViewOperations = ({
         })}
       </Row>
       <Row className="d-flex justify-content-center align-items-center bg-light">
-        <h1> Total: $ {total}</h1>
+        <h1> Total: {formatter.format(total)}</h1>
       </Row>
       <Pag
         currentPage={currentPage}

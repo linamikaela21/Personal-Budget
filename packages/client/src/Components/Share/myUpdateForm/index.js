@@ -137,6 +137,7 @@ export const MyUpdateForm = ({
               type="submit"
               onClick={isSubmitting ? null : onHide}
               disabled={isSubmitting}
+              value="Submit"
             >
               Send
             </Button>
