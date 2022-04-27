@@ -18,7 +18,7 @@ export const Filter = ({ setCurrentPage }) => {
   }, [dispatch, filterType]);
 
   return (
-    <div className="d-flex flex-row">
+    <div>
       <ViewFilters filteringType={filteringType} />
     </div>
   );

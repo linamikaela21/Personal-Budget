@@ -7,11 +7,7 @@ import { updateOperation } from "../../../Redux/actions/operationsActions";
 
 export const MyUpdateForm = ({
   onHide,
-  operationCategory,
-  operationConcept,
-  operationAmount,
-  operationId,
-  operationType
+  operation
 }) => {
   const dispatch = useDispatch();
   const schema = yup.object().shape({
@@ -20,23 +16,21 @@ export const MyUpdateForm = ({
     category: yup.string('Category should be a frase').required('Category is required'),
     type: yup.string('Type should be a income or outflow').required('Type is required'),
   });
-
-  console.log("operation ===>>", operationConcept);
   return (
     <Formik
       validationSchema={schema}
       onSubmit={async (values, { setSubmitting, resetForm }) => {
         setSubmitting(true);
-        console.log('valuessssssss', values);
-        dispatch(updateOperation(operationId, values));
+        dispatch(updateOperation(operation._id, values));
         resetForm();
         setSubmitting(false);
         window.location.reload();
       }}
       initialValues={{
-        concept: operationConcept,
-        amount: operationAmount,
-        category: operationCategory,
+        concept: operation.concept,
+        amount: operation.amount,
+        category: operation.category,
+        type: operation.type,
       }}
       enableReinitialize
     >
@@ -50,7 +44,6 @@ export const MyUpdateForm = ({
         isSubmitting,
       }) => (
         <Form onSubmit={handleSubmit}>
-          {console.log(values)}
           <Form.Group as={Row} className="mb-3">
             <Form.Label column sm="2">
               Concept
@@ -125,19 +118,18 @@ export const MyUpdateForm = ({
               Type
             </Form.Label>
             <Col sm="10">
-              <Form.Control as="select" size="lg" defaultValue={operationType}>
+              <Form.Control as="select" size="lg" defaultValue={operation.type}>
                 <option>Outflow</option>
               </Form.Control>
             </Col>
           </Form.Group>
 
           <div className="d-flex justify-content-center align-items-center">
-            <Button
+          <Button
               size="lg"
               type="submit"
               onClick={isSubmitting ? null : onHide}
               disabled={isSubmitting}
-              value="Submit"
             >
               Send
             </Button>

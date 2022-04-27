@@ -10,7 +10,6 @@ export const Operations = () => {
   const operationFiltered = useSelector((state) => state.operationFiltered);
   const [currentPage, setCurrentPage] = useState(1);
   const [modalShow, setModalShow] = useState(false);
-  const [update, setUpdate] = useState(false);
 
   useEffect(() => {
     dispatch(getOperations());
@@ -21,8 +20,6 @@ export const Operations = () => {
       <Header
         modalShow={modalShow}
         setModalShow={setModalShow}
-        update={update}
-        setUpdate={setUpdate}
         setCurrentPage={setCurrentPage}
       />
       <ViewOperations
@@ -32,8 +29,6 @@ export const Operations = () => {
         operations={operations}
         modalShow={modalShow}
         setModalShow={setModalShow}
-        update={update}
-        setUpdate={setUpdate}
       />
     </div>
   );

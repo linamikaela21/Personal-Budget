@@ -1,19 +1,17 @@
-import React, { StrictMode } from 'react';
-import { createRoot } from 'react-dom/client';
-import './index.css';
-import { App } from './App';
-import { Provider } from 'react-redux';
-import { BrowserRouter as Router } from 'react-router-dom';
-import { PersistGate } from 'redux-persist/integration/react';
-import Store from './Redux/store';
-import reportWebVitals from './reportWebVitals';
+import React, { StrictMode } from "react";
+import { createRoot } from "react-dom/client";
+import "./index.css";
+import { App } from "./App";
+import { Provider } from "react-redux";
+import { BrowserRouter as Router } from "react-router-dom";
+import { PersistGate } from "redux-persist/integration/react";
+import store from "./Redux/store";
+import reportWebVitals from "./reportWebVitals";
+import persistStore from "redux-persist/es/persistStore";
 
-const { persistor, store } = Store;
+let persistor = persistStore(store);
 
-//eslint-disable-next-line
-persistor.purge();
-
-const rootElement = document.getElementById('root');
+const rootElement = document.getElementById("root");
 const root = createRoot(rootElement);
 
 root.render(

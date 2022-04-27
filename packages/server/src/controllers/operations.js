@@ -48,7 +48,6 @@ exports.deleteOperation = async (req, res) => {
 exports.updateOperation = async (req, res) => {
   const { id } = req.params;
   const { amount, concept, category } = req.body;
-  console.log('SERVER', id, amount, concept, category);
   Budget.findByIdAndUpdate(
     id,
     { amount, concept, category },

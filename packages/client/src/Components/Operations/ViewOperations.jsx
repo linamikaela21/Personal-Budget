@@ -10,8 +10,6 @@ export const ViewOperations = ({
   setCurrentPage,
   setModalShow,
   modalShow,
-  update,
-  setUpdate,
   currentPage = 1,
   itemsPerPage = 10,
 }) => {
@@ -39,7 +37,7 @@ export const ViewOperations = ({
   }, [operations]);
 
   return (
-    <Container data-testid="test-id-view-operations bg-dark" className="w-100">
+    <Container className="w-100">
       <Row className="d-block" style={{ paddingLeft: "20%" }}>
         {currentItems?.map((op) => {
           return (
@@ -49,8 +47,6 @@ export const ViewOperations = ({
                 formatter={formatter}
                 modalShow={modalShow}
                 setModalShow={setModalShow}
-                update={update}
-                setUpdate={setUpdate}
               />
             </Row>
           );

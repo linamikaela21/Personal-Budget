@@ -18,7 +18,7 @@ export const getOperations = () => async (dispatch) => {
   }
 };
 
-export const getOperationById = (id) => async (dispatch) => {
+export const getOperationById = (id = '') => async (dispatch) => {
   try {
     const operation = await fetchData(`${URL_ALL_OPERATIONS}/${id}`, "get");
     return dispatch({ type: GET_OPERATION_BY_ID, payload: operation });
@@ -52,22 +52,22 @@ export const addOperation = (operation) => async (dispatch) => {
   }
 };
 
-export const updateOperation = (operation) => async (dispatch) => {
+export const updateOperation = (id, operation) => async (dispatch) => {
   console.log(operation);
   try {
-    console.log("updateOperationACTION", operation._id, operation);
-    // const updateOperation = await fetch(
-    //   `${URL_ALL_OPERATIONS}/${operation._id}`,
-    //   {
-    //     headers: {
-    //       Accept: "application/json",
-    //       "Content-Type": "application/json",
-    //     },
-    //     method: "POST",
-    //     body: JSON.stringify(operation),
-    //   }
-    // );
-   // return dispatch({ type: UPDATE_OPERATION, payload: updateOperation });
+    console.log("updateOperationACTION", id, operation);
+    const updateOperation = await fetch(
+      `${URL_ALL_OPERATIONS}/${id}`,
+      {
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        method: "POST",
+        body: JSON.stringify(operation),
+      }
+    );
+   return dispatch({ type: UPDATE_OPERATION, payload: updateOperation });
   } catch (error) {
     console.log(error);
   }

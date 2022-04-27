@@ -10,19 +10,20 @@ export const ViewFilters = ({ filteringType }) => {
         variant={"Primary".toLowerCase()}
         title="Type"
         className="p-2"
+        size="lg"
         onSelect={filteringType}
       >
-        <Dropdown.Item eventKey="all" className="text-center fw-bolder fs-6">
+        <Dropdown.Item eventKey="all" className="text-center fw-bolder fs-4 p-1">
           All
         </Dropdown.Item>
         <Dropdown.Divider />
-        <Dropdown.Item eventKey="income" className="text-center fw-bolder fs-6">
+        <Dropdown.Item eventKey="income" className="text-center fw-bolder fs-4 p-1">
           Income
         </Dropdown.Item>
         <Dropdown.Divider />
         <Dropdown.Item
           eventKey="outflow"
-          className="text-center fw-bolder fs-6"
+          className="text-center fw-bolder fs-4 p-1"
         >
           Outflow
         </Dropdown.Item>

@@ -13,9 +13,7 @@ export const CardBox = ({
   operation,
   modalShow,
   setModalShow,
-  update,
-  setUpdate,
-  formatter
+  formatter,
 }) => {
   const dispatch = useDispatch();
   const op = useSelector((state) => state.operation);
@@ -28,7 +26,9 @@ export const CardBox = ({
 
   const updateOp = async (id) => {
     dispatch(getOperationById(id));
-    setModalShow(true);
+    setTimeout(() => {
+      setModalShow(true);
+    }, 500);
   };
 
   return (
@@ -62,10 +62,7 @@ export const CardBox = ({
               show={modalShow}
               onHide={() => {
                 setModalShow(false);
-                setUpdate(true);
               }}
-              update={update}
-              setUpdate={setUpdate}
             />
             <Button
               variant="danger text-capitalize"
