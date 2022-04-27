@@ -9,7 +9,7 @@ exports.getOperationById = async (req, res) => {
   const { id } = req.params;
   Budget.findOne({_id: id}, (err, data) => {
     if (err) {
-      console.log(err);
+      return res.status(400).json({ err });
     } else {
       res.send(data);
     }
@@ -27,7 +27,7 @@ exports.newOperation = async (req, res) => {
   });
   newBudget.save((err, data) => {
     if (err) {
-      console.log(err);
+      return res.status(400).json({ err });
     } else {
       res.status(201).send(data);
     }
@@ -38,7 +38,7 @@ exports.deleteOperation = async (req, res) => {
   const { id } = req.params;
   Budget.findByIdAndDelete(id, (err, data) => {
     if (err) {
-      console.log(err);
+      return res.status(400).json({ err });
     } else {
       res.status(200).send("Data Deleted !");
     }
@@ -53,7 +53,7 @@ exports.updateOperation = async (req, res) => {
     { amount, concept, category },
     (err, data) => {
       if (err) {
-        console.log(err);
+        return res.status(400).json({ err });
       } else {
         res.status(200).send('Data updated !');
       }
