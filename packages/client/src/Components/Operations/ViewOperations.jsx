@@ -16,14 +16,21 @@ export const ViewOperations = ({
   const [total, setTotal] = useState(0);
   const indexLastItem = currentPage * itemsPerPage;
   const indexFirstItem = indexLastItem - itemsPerPage;
-  const currentItems = operationFiltered.length ? operationFiltered.slice(indexFirstItem, indexLastItem) : operations.slice(indexFirstItem, indexLastItem);
+  const currentItems = operationFiltered.length
+    ? operationFiltered.slice(indexFirstItem, indexLastItem)
+    : operations.slice(indexFirstItem, indexLastItem);
 
   const paginationCallback = (pageNumber) => setCurrentPage(pageNumber);
-  
-  const formatter = new Intl.NumberFormat('en-US', {
-    style: 'currency',
-    currency: 'USD',
-  });
+
+  const arsCurrency = (number) => {
+    const currency = new Intl.NumberFormat("es", {
+      style: "currency",
+      currency: "ARS",
+      minimumFractionDigits: 0,
+    });
+    currency.format(number);
+    return `$ ${currency.format(number)}`
+  };
 
   useEffect(() => {
     setTotal(
@@ -44,7 +51,7 @@ export const ViewOperations = ({
             <Row xs={1} md={1} lg={1} key={op._id} className="w-75 m-2">
               <CardBox
                 operation={op}
-                formatter={formatter}
+                arsCurrency={arsCurrency}
                 modalShow={modalShow}
                 setModalShow={setModalShow}
               />
@@ -53,7 +60,7 @@ export const ViewOperations = ({
         })}
       </Row>
       <Row className="d-flex justify-content-center align-items-center bg-light">
-        <h1> Total: {formatter.format(total)}</h1>
+        <h1> Total: {arsCurrency(total)}</h1>
       </Row>
       <Pag
         currentPage={currentPage}

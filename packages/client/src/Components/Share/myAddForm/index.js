@@ -22,7 +22,6 @@ export const MyAddForm = ({ onHide }) => {
         dispatch(addOperation(values));
         resetForm();
         setSubmitting(false);
-        window.location.reload();
       }}
       initialValues={{
         concept: "",

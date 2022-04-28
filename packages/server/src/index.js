@@ -6,6 +6,7 @@ const cors = require('cors')
 
 const operationsRoutes = require('./routes/operations')
 const userRoutes = require('./routes/user')
+const bodyParser = require('body-parser')
 
 env.config()
 
@@ -19,6 +20,8 @@ mongoose.connect(connectionString, {
   }).then(() => console.log('DataBase connected'))
 
 app.use(express.json())
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
 
 app.use('/budget', operationsRoutes)
 app.use('/', userRoutes)

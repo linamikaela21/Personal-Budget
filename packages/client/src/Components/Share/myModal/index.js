@@ -13,18 +13,19 @@ export const MyModal = (props) => {
     >
       <Modal.Header>
         <Modal.Title id="contained-modal-title-vcenter">
-          {props.operation ? "Update Operation" : "Add Operation"}
+          {props.operation && Object.keys(props.operation)?.length > 0 ? (
+            <h1>Update Operation</h1>
+          ) : (
+            <h1>Add Operation</h1>
+          )}
         </Modal.Title>
         <Button className="bg-danger" onClick={props.onHide}>
           x
         </Button>
       </Modal.Header>
       <Modal.Body>
-        {props.operation ? (
-          <MyUpdateForm
-            onHide={props.onHide}
-            operation={props.operation}
-          />
+        {props.operation && Object.keys(props.operation)?.length > 0 ?(
+          <MyUpdateForm onHide={props.onHide} operation={props.operation} />
         ) : (
           <MyAddForm onHide={props.onHide} />
         )}

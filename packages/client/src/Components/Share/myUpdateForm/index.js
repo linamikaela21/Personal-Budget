@@ -24,7 +24,6 @@ export const MyUpdateForm = ({
         dispatch(updateOperation(operation._id, values));
         resetForm();
         setSubmitting(false);
-        window.location.reload();
       }}
       initialValues={{
         concept: operation.concept,

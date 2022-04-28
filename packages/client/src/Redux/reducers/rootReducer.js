@@ -1,34 +1,54 @@
-import {
-  GET_OPERATIONS,
-  GET_OPERATION_BY_ID,
-  DELETE_OPERATION,
-  ADD_OPERATION,
-  UPDATE_OPERATION,
-  FILTER_BY_TYPE,
-} from "../actions/utils/constants";
+import { userContants, productContants } from "../utils/constants";
+
 const initialState = {
+  token: null,
+  authenticate: false,
+  error: null,
+  message: "",
+  user: {},
   operations: [],
   operation: {},
-  operationFiltered: []
+  operationFiltered: [],
 };
 const rootReducer = (state = initialState, action) => {
   switch (action.type) {
-    case GET_OPERATIONS:
+    case userContants.SIGN_IN_SUCCESS:
+      return {
+        ...state,
+        user: action.payload.user,
+        token: action.payload.token,
+        authenticate: true,
+        authenticating: false,
+      };
+
+    case userContants.SIGN_IN_FAIL:
+      return { ...state, error: action.payload.error };
+
+    case userContants.SIGN_UP_SUCCESS:
+      return { ...state, message: action.payload.message };
+
+    case userContants.SIGN_UP_FAIL:
+      return { ...state, error: action.payload.error };
+
+    case userContants.LOGOUT_SUCCESS:
+      return (state = { ...initialState });
+
+    case productContants.GET_OPERATIONS:
       return { ...state, operations: action.payload };
 
-    case GET_OPERATION_BY_ID:
+    case productContants.GET_OPERATION_BY_ID:
       return { ...state, operation: action.payload };
 
-    case DELETE_OPERATION:
+    case productContants.DELETE_OPERATION:
       return { ...state, operations: action.payload };
 
-    case ADD_OPERATION:
+    case productContants.ADD_OPERATION:
       return { ...state, operations: action.payload };
 
-    case UPDATE_OPERATION:
+    case productContants.UPDATE_OPERATION:
       return { ...state, operations: action.payload };
 
-    case FILTER_BY_TYPE:
+    case productContants.FILTER_BY_TYPE:
       const allOperations = state.operations;
       const operationsFiltered =
         action.payload === "all"

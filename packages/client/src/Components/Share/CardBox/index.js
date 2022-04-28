@@ -13,7 +13,7 @@ export const CardBox = ({
   operation,
   modalShow,
   setModalShow,
-  formatter,
+  arsCurrency,
 }) => {
   const dispatch = useDispatch();
   const op = useSelector((state) => state.operation);
@@ -21,14 +21,13 @@ export const CardBox = ({
   const deleteOp = (id) => {
     dispatch(deleteOperation(id));
     setModalShow(false);
-    window.location.reload();
   };
 
   const updateOp = async (id) => {
-    dispatch(getOperationById(id));
+    await dispatch(getOperationById(id));
     setTimeout(() => {
       setModalShow(true);
-    }, 500);
+    }, 1000);
   };
 
   return (
@@ -47,8 +46,8 @@ export const CardBox = ({
           <h5>{operation.concept}</h5>
           <h5>
             {operation.type === "income"
-              ? `${formatter.format(operation.amount)}`
-              : `- ${formatter.format(operation.amount)}`}
+              ? `${arsCurrency(operation.amount)}`
+              : `- ${arsCurrency(operation.amount)}`}
           </h5>
           <div>
             <Button
