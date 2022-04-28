@@ -3,13 +3,23 @@ import { Container, Col, Row, Badge, Button } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import { SignIn } from "./SignIn";
 import { SignUp } from "./SignUp";
+import { MdOutlineArrowBack } from "react-icons/md";
 
 export const Login = () => {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   return (
     <Container className="bg-info p-2 mt-2">
       <Row className="d-flex justify-content-center align-items-center w-100">
-        <Button variant="secondary" size="lg" type="button" className="w-25 p-2" onClick={() => navigate('/')}>Go Back</Button>
+        <Button
+          variant="secondary"
+          size="lg"
+          type="button"
+          className="w-25 p-2"
+          onClick={() => navigate("/")}
+        >
+          <MdOutlineArrowBack size={30} className="m-1" />
+          Go Back
+        </Button>
       </Row>
       <Container className="d-flex justify-content-center align-items-center p-5 mt-2">
         <Col>

@@ -5,14 +5,20 @@ import * as yup from "yup";
 import { Formik } from "formik";
 import { signIn } from "../../../Redux/actions/userActions";
 import { useNavigate } from "react-router-dom";
+import { MdAlternateEmail } from "react-icons/md";
+import { RiLockPasswordFill } from "react-icons/ri";
+import { BiSend } from "react-icons/bi";
 
 export const SignIn = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const userSchema = yup.object().shape({
-    email: yup.string().email('It should be a valid E-mail').required('E-mail is required'),
-    password: yup.string().required('Password is required'),
+    email: yup
+      .string()
+      .email("It should be a valid E-mail")
+      .required("E-mail is required"),
+    password: yup.string().required("Password is required"),
   });
 
   return (
@@ -42,9 +48,13 @@ export const SignIn = () => {
         <Form onSubmit={handleSubmit} className="w-100 m-4">
           <Form.Group as={Row} className="mb-3">
             <Col sm="12">
-            <Form.Label sm="12" className="d-flex justify-content-center align-items-center">
-              E-mail
-            </Form.Label>
+              <Form.Label
+                sm="12"
+                className="d-flex justify-content-center align-items-center"
+              >
+                <MdAlternateEmail size={30} className="m-1" />
+                E-mail
+              </Form.Label>
               <Form.Control
                 required
                 type="email"
@@ -66,9 +76,13 @@ export const SignIn = () => {
           </Form.Group>
           <Form.Group as={Row} className="mb-3">
             <Col sm="12">
-          <Form.Label sm="12" className="d-flex justify-content-center align-items-center">
-              Password
-            </Form.Label>
+              <Form.Label
+                sm="12"
+                className="d-flex justify-content-center align-items-center"
+              >
+                <RiLockPasswordFill size={30} className="m-1" />
+                Password
+              </Form.Label>
               <Form.Control
                 required
                 type="password"
@@ -89,7 +103,13 @@ export const SignIn = () => {
             </Col>
           </Form.Group>
           <div className="d-flex justify-content-center align-items-center">
-            <Button variant="secondary"  size="lg" type="submit" disabled={isSubmitting}>
+            <Button
+              variant="secondary"
+              size="lg"
+              type="submit"
+              disabled={isSubmitting}
+            >
+              <BiSend size={30} className="m-1" />
               Sign In
             </Button>
           </div>

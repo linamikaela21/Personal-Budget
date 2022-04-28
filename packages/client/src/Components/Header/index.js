@@ -1,10 +1,12 @@
 import { Navbar, Container, Button } from "react-bootstrap";
-import { FaMoneyBillWave } from "react-icons/fa";
 import { GiSaveArrow } from "react-icons/gi";
 import { useDispatch, useSelector } from "react-redux";
 import { logOut } from "../../Redux/actions/userActions";
 import { Filter } from "../Share/Filter";
 import { MyModal } from "../Share/myModal";
+import { FaMoneyBillWave } from "react-icons/fa";
+import { BiLogIn, BiLogOut } from "react-icons/bi";
+
 
 export const Header = ({ setModalShow, modalShow, setCurrentPage }) => {
   const dispatch = useDispatch();
@@ -22,6 +24,7 @@ export const Header = ({ setModalShow, modalShow, setCurrentPage }) => {
           Personal Budget
         </Navbar.Brand>
         <Button
+        variant="success" 
           onClick={() => {
             setTimeout(() => {
               setModalShow(true);
@@ -33,10 +36,14 @@ export const Header = ({ setModalShow, modalShow, setCurrentPage }) => {
         </Button>
         <MyModal show={modalShow} setModalShow={setModalShow} />
         {!token ? (
-          <Button href="/login">Login</Button>
+          <Button variant="info" href="/login">
+            Login
+            <BiLogIn size={28} className="m-2 mb-3" />
+          </Button>
         ) : (
-          <Button href="/" onClick={() => dispatch(logOut())}>
+          <Button variant="secondary"  href="/" onClick={() => dispatch(logOut())}>
             Logout
+            <BiLogOut size={28} className="m-2 mb-3" />
           </Button>
         )}
         <div className="d-flex justify-content-center aling-items-center">

@@ -5,6 +5,10 @@ import * as yup from "yup";
 import { Formik } from "formik";
 import { signUp } from "../../../Redux/actions/userActions";
 import { useNavigate } from "react-router-dom";
+import { GoPerson } from "react-icons/go";
+import { MdAlternateEmail } from "react-icons/md";
+import { RiLockPasswordFill } from "react-icons/ri";
+import { BiSend } from "react-icons/bi";
 
 export const SignUp = () => {
   const dispatch = useDispatch();
@@ -46,9 +50,13 @@ export const SignUp = () => {
         <Form onSubmit={handleSubmit} className="w-100 m-4">
           <Form.Group as={Row} className="mb-3">
             <Col sm="12">
-          <Form.Label sm="12" className="d-flex justify-content-center align-items-center">
-              FirstName
-            </Form.Label>
+              <Form.Label
+                sm="12"
+                className="d-flex justify-content-center align-items-center"
+              >
+                <GoPerson size={30} className="m-1" />
+                FirstName
+              </Form.Label>
               <Form.Control
                 required
                 type="text"
@@ -70,9 +78,13 @@ export const SignUp = () => {
           </Form.Group>
           <Form.Group as={Row} className="mb-3">
             <Col sm="12">
-          <Form.Label sm="12" className="d-flex justify-content-center align-items-center">
-              LastName
-            </Form.Label>
+              <Form.Label
+                sm="12"
+                className="d-flex justify-content-center align-items-center"
+              >
+                <GoPerson size={30} className="m-1" />
+                LastName
+              </Form.Label>
               <Form.Control
                 required
                 type="text"
@@ -94,9 +106,13 @@ export const SignUp = () => {
           </Form.Group>
           <Form.Group as={Row} className="mb-3">
             <Col sm="12">
-          <Form.Label sm="12" className="d-flex justify-content-center align-items-center">
-              E-mail
-            </Form.Label>
+              <Form.Label
+                sm="12"
+                className="d-flex justify-content-center align-items-center"
+              >
+                <MdAlternateEmail size={30} className="m-1" />
+                E-mail
+              </Form.Label>
               <Form.Control
                 required
                 type="email"
@@ -118,9 +134,13 @@ export const SignUp = () => {
           </Form.Group>
           <Form.Group as={Row} className="mb-3">
             <Col sm="12">
-          <Form.Label sm="12" className="d-flex justify-content-center align-items-center">
-              Password
-            </Form.Label>
+              <Form.Label
+                sm="12"
+                className="d-flex justify-content-center align-items-center"
+              >
+                <RiLockPasswordFill size={30} className="m-1" />
+                Password
+              </Form.Label>
               <Form.Control
                 required
                 type="password"
@@ -141,7 +161,13 @@ export const SignUp = () => {
             </Col>
           </Form.Group>
           <div className="d-flex justify-content-center align-items-center">
-            <Button variant="secondary"  size="lg" type="submit" disabled={isSubmitting}>
+            <Button
+              variant="secondary"
+              size="lg"
+              type="submit"
+              disabled={isSubmitting}
+            >
+              <BiSend size={30} className="m-1" />
               Sign Up
             </Button>
           </div>
