@@ -1,27 +1,27 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { ViewOperations } from "./ViewOperations";
 import { getOperations } from "../../Redux/actions/operationsActions";
-import { Header } from "../Header";
 
-export const Operations = () => {
+export const Operations = ({
+  modalShow,
+  currentPage,
+  setCurrentPage,
+  setModalShow,
+}) => {
   const dispatch = useDispatch();
   const operations = useSelector((state) => state.operations);
+  const token = useSelector((state) => state.token);
   const operationFiltered = useSelector((state) => state.operationFiltered);
-  const [currentPage, setCurrentPage] = useState(1);
-  const [modalShow, setModalShow] = useState(false);
 
   useEffect(() => {
-    dispatch(getOperations());
-  }, [dispatch]);
+    if (token) {
+      dispatch(getOperations());
+    }
+  }, [dispatch, token]);
 
   return (
     <div data-testid="test-id-products">
-      <Header
-        modalShow={modalShow}
-        setModalShow={setModalShow}
-        setCurrentPage={setCurrentPage}
-      />
       <ViewOperations
         operationFiltered={operationFiltered}
         currentPage={currentPage}

@@ -1,6 +1,7 @@
 import { URL_SIGN_IN, URL_SIGN_UP, URL_LOGOUT } from "../utils/urlConstants";
 import { userContants } from "../utils/constants";
 import { fetchData } from "./fetch";
+import storage from "redux-persist/lib/storage";
 
 export const signIn = (userData) => async (dispatch) => {
   const res = await fetchData({
@@ -60,6 +61,7 @@ export const isUserLoggedIn = () => {
 export const logOut = () => async (dispatch) => {
   await fetchData({ url: URL_LOGOUT, method: "post" });
   localStorage.clear();
+  storage.removeItem('token')
   window.location.reload()
   dispatch({
     type: userContants.LOGOUT_SUCCESS,
