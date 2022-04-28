@@ -1,5 +1,5 @@
 import React from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Form, Col, Row, Button } from "react-bootstrap";
 import * as yup from "yup";
 import { Formik } from "formik";
@@ -7,21 +7,36 @@ import { addOperation } from "../../../Redux/actions/operationsActions";
 
 export const MyAddForm = ({ onHide }) => {
   const dispatch = useDispatch();
+  const user = useSelector((state) => state.user);
+
   const schema = yup.object().shape({
-    concept: yup.string('Concept should be a frase').required('Concept is required'),
-    amount: yup.number('Amount should be a number').required('Amount is required').min(1).max(1000000),
-    category: yup.string('Category should be a frase').required('Category is required'),
-    type: yup.string('Type should be a income or outflow').required('Type is required'),
+    concept: yup
+      .string("Concept should be a frase")
+      .required("Concept is required"),
+    amount: yup
+      .number("Amount should be a number")
+      .required("Amount is required")
+      .min(1)
+      .max(1000000),
+    category: yup
+      .string("Category should be a frase")
+      .required("Category is required"),
+    type: yup
+      .string("Type should be a income or outflow")
+      .required("Type is required"),
   });
+
 
   return (
     <Formik
       validationSchema={schema}
       onSubmit={async (values, { setSubmitting, resetForm }) => {
         setSubmitting(true);
-        dispatch(addOperation(values));
+        const data = { userEmail: user.email, ...values };
+        dispatch(addOperation(data));
         resetForm();
         setSubmitting(false);
+        window.location.reload()
       }}
       initialValues={{
         concept: "",
@@ -58,7 +73,9 @@ export const MyAddForm = ({ onHide }) => {
                 onBlur={handleBlur}
               />
               {touched.concept && errors.concept ? (
-                <div className="bg-danger text-white p-2 mt-1">{errors.concept}</div>
+                <div className="bg-danger text-white p-2 mt-1">
+                  {errors.concept}
+                </div>
               ) : null}
             </Col>
           </Form.Group>
@@ -81,7 +98,9 @@ export const MyAddForm = ({ onHide }) => {
                 onBlur={handleBlur}
               />
               {touched.amount && errors.amount ? (
-                <div className="bg-danger text-white p-2 mt-1">{errors.amount}</div>
+                <div className="bg-danger text-white p-2 mt-1">
+                  {errors.amount}
+                </div>
               ) : null}
             </Col>
           </Form.Group>
@@ -104,7 +123,9 @@ export const MyAddForm = ({ onHide }) => {
                 onBlur={handleBlur}
               />
               {touched.category && errors.category ? (
-                <div className="bg-danger text-white p-2 mt-1">{errors.category}</div>
+                <div className="bg-danger text-white p-2 mt-1">
+                  {errors.category}
+                </div>
               ) : null}
             </Col>
           </Form.Group>
@@ -139,7 +160,9 @@ export const MyAddForm = ({ onHide }) => {
                 </option>
               </Form.Control>
               {touched.type && errors.type ? (
-                <div className="bg-danger text-white p-2 mt-1">{errors.type}</div>
+                <div className="bg-danger text-white p-2 mt-1">
+                  {errors.type}
+                </div>
               ) : null}
             </Col>
           </Form.Group>

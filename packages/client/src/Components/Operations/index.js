@@ -11,14 +11,15 @@ export const Operations = ({
 }) => {
   const dispatch = useDispatch();
   const operations = useSelector((state) => state.operations);
-  const token = useSelector((state) => state.token);
+  const token = localStorage.getItem("token");
+  const userEmail = useSelector((state) => state.user.email);
   const operationFiltered = useSelector((state) => state.operationFiltered);
 
   useEffect(() => {
     if (token) {
-      dispatch(getOperations());
+      dispatch(getOperations(userEmail));
     }
-  }, [dispatch, token]);
+  }, [dispatch, token, userEmail]);
 
   return (
     <div data-testid="test-id-products">

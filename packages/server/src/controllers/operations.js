@@ -1,13 +1,22 @@
 const Budget = require("../models/Budget");
+const User = require("../models/User");
 
 exports.getOperations = async (req, res) => {
-  const budget = await Budget.find();
-  res.status(200).send(budget);
+  User.findOne({ email: req.body.userEmail }).exec(async (err, user) => {
+    if (err) {
+      return res.status(400).json({ err });
+    } else if (user) {
+      const budgets = await Budget.find({
+        userEmail: { $all: [`${user.email}`] },
+      });
+      res.status(200).send(budgets);
+    }
+  });
 };
 
 exports.getOperationById = async (req, res) => {
   const { id } = req.params;
-  Budget.findOne({_id: id}, (err, data) => {
+  Budget.findOne({ _id: id }, (err, data) => {
     if (err) {
       return res.status(400).json({ err });
     } else {
@@ -17,8 +26,9 @@ exports.getOperationById = async (req, res) => {
 };
 
 exports.newOperation = async (req, res) => {
-  const { concept, amount, category, type } = req.body;
+  const { concept, amount, category, type, userEmail } = req.body;
   const newBudget = await new Budget({
+    userEmail,
     concept,
     amount,
     category,
@@ -29,14 +39,17 @@ exports.newOperation = async (req, res) => {
     if (err) {
       return res.status(400).json({ err });
     } else {
-      res.status(201).send(data);
+      const { _id, concept, amount, category, type, date, userEmail } = data;
+      res
+        .status(201)
+        .send({ _id, concept, amount, category, type, date, userEmail });
     }
   });
 };
 
 exports.deleteOperation = async (req, res) => {
   const { id } = req.params;
-  Budget.findByIdAndDelete(id, (err, data) => {
+  Budget.findByIdAndDelete(id, (err, _data) => {
     if (err) {
       return res.status(400).json({ err });
     } else {
@@ -49,13 +62,13 @@ exports.updateOperation = async (req, res) => {
   const { id } = req.params;
   const { amount, concept, category } = req.body;
   Budget.findByIdAndUpdate(
-    id,
+    { _id: id },
     { amount, concept, category },
-    (err, data) => {
+    (err, _data) => {
       if (err) {
         return res.status(400).json({ err });
       } else {
-        res.status(200).send('Data updated !');
+        res.status(200).send("Data updated !");
       }
     }
   );

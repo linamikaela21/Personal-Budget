@@ -62,6 +62,7 @@ export const logOut = () => async (dispatch) => {
   await fetchData({ url: URL_LOGOUT, method: "post" });
   localStorage.clear();
   storage.removeItem('token')
+  storage.removeItem('persist:root')
   window.location.reload()
   dispatch({
     type: userContants.LOGOUT_SUCCESS,

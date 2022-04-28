@@ -1,31 +1,33 @@
-const express = require('express')
-const env = require('dotenv')
-const app = express()
-const mongoose = require('mongoose')
-const cors = require('cors')
+const express = require("express");
+const env = require("dotenv");
+const app = express();
+const mongoose = require("mongoose");
+const cors = require("cors");
 
-const operationsRoutes = require('./routes/operations')
-const userRoutes = require('./routes/user')
-const bodyParser = require('body-parser')
+const operationsRoutes = require("./routes/operations");
+const userRoutes = require("./routes/user");
+const bodyParser = require("body-parser");
 
-env.config()
+env.config();
 
-app.use(cors())
+app.use(cors());
 
-const connectionString = `mongodb+srv://${process.env.MONGO_DB_USER}:${process.env.MONGO_DB_PASSWORD}@${process.env.MONGO_DB_CLOUSTER}.ybv2n.mongodb.net/${process.env.MONGO_DB_DATABASE}?retryWrites=true&w=majority`
+const connectionString = `mongodb+srv://${process.env.MONGO_DB_USER}:${process.env.MONGO_DB_PASSWORD}@${process.env.MONGO_DB_CLOUSTER}.ybv2n.mongodb.net/${process.env.MONGO_DB_DATABASE}?retryWrites=true&w=majority`;
 
-mongoose.connect(connectionString, {
+mongoose
+  .connect(connectionString, {
     useNewUrlParser: true,
-    useUnifiedTopology: true
-  }).then(() => console.log('DataBase connected'))
+    useUnifiedTopology: true,
+  })
+  .then(() => console.log("DataBase connected"));
 
-app.use(express.json())
+app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
-app.use('/budget', operationsRoutes)
-app.use('/', userRoutes)
+app.use("/budget", operationsRoutes);
+app.use("/", userRoutes);
 
 app.listen(process.env.PORT, () => {
-    console.log(`Server running on port ${process.env.PORT}`)
-})
+  console.log(`Server running on port ${process.env.PORT}`);
+});

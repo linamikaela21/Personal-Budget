@@ -7,7 +7,10 @@ const generateJwtToken = (_id) => {
 };
 
 exports.signup = async (req, res) => {
-  User.findOne({ email: req.body.email }).exec(async (error, user) => {
+  User.findOne({ email: req.body.email }).exec(async (err, user) => {
+    if (err) {
+      return res.status(400).json({ err });
+    }
     if (user)
       return res.status(400).json({
         error: "User already registered",
@@ -23,8 +26,8 @@ exports.signup = async (req, res) => {
         hash_password,
       });
 
-      newUser.save((error, user) => {
-        if (error) {
+      newUser.save((err, user) => {
+        if (err) {
           return res.status(400).json({ message: "Something went wrong" });
         }
         if (user) {
@@ -32,8 +35,8 @@ exports.signup = async (req, res) => {
           const { _id, firstName, lastName, email } = user;
           return res.status(201).json({
             token,
-            user: { _id, firstName, lastName, email }
-          })
+            user: { _id, firstName, lastName, email },
+          });
         }
       });
     }
@@ -41,8 +44,8 @@ exports.signup = async (req, res) => {
 };
 
 exports.signin = async (req, res) => {
-   User.findOne({ email: req.body.email }).exec(async (error, user) => {
-    if (error) return res.status(400).json({ error });
+  User.findOne({ email: req.body.email }).exec(async (err, user) => {
+    if (err) return res.status(400).json({ err });
     if (user) {
       const isPassword = await user.authenticate(req.body.password);
       if (isPassword) {
@@ -57,13 +60,13 @@ exports.signin = async (req, res) => {
           message: "Something went wrong",
         });
       }
-    } 
+    }
   });
 };
 
-exports.signout = (req, res) => {
-  res.clearCookie('token')
+exports.signout = (_req, res) => {
+  res.clearCookie("token");
   res.status(200).json({
-    menssage: 'Signout successfully'
-  })
-  }
+    menssage: "Signout successfully",
+  });
+};

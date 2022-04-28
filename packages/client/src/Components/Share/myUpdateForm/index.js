@@ -1,15 +1,16 @@
 import React from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Form, Col, Row, Button } from "react-bootstrap";
 import * as yup from "yup";
 import { Formik } from "formik";
-import { updateOperation } from "../../../Redux/actions/operationsActions";
+import { updateOperation, getOperations } from "../../../Redux/actions/operationsActions";
 
 export const MyUpdateForm = ({
   onHide,
   operation
 }) => {
   const dispatch = useDispatch();
+  const userEmail = useSelector(state => state.user.email);
   const schema = yup.object().shape({
     concept: yup.string('Concept should be a frase').required('Concept is required'),
     amount: yup.number('Amount should be a number').required('Amount is required').min(1).max(1000000),
@@ -24,6 +25,7 @@ export const MyUpdateForm = ({
         dispatch(updateOperation(operation._id, values));
         resetForm();
         setSubmitting(false);
+        dispatch(getOperations(userEmail));
       }}
       initialValues={{
         concept: operation.concept,

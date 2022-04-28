@@ -9,7 +9,7 @@ const persistConfig = {
 };
 
 // Discomment this line to clean the persist store (reducers)
- storage.removeItem('root')
+// storage.removeItem('root:storage')
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 

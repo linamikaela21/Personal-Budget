@@ -6,11 +6,13 @@ import { Filter } from "../Share/Filter";
 import { MyModal } from "../Share/myModal";
 import { FaMoneyBillWave } from "react-icons/fa";
 import { BiLogIn, BiLogOut } from "react-icons/bi";
-
+import { getOperations } from "../../Redux/actions/operationsActions";
 
 export const Header = ({ setModalShow, modalShow, setCurrentPage }) => {
   const dispatch = useDispatch();
-  const token = useSelector((state) => state.token);
+  const token = localStorage.getItem("token");
+  const userEmail = useSelector(state => state.user.email);
+
   return (
     <Navbar
       bg="light"
@@ -23,32 +25,39 @@ export const Header = ({ setModalShow, modalShow, setCurrentPage }) => {
           <FaMoneyBillWave size={40} className="m-3 mb-3" />
           Personal Budget
         </Navbar.Brand>
-        <Button
-        variant="success" 
-          onClick={() => {
-            setTimeout(() => {
-              setModalShow(true);
-            }, 500);
-          }}
-        >
-          Add Operation
-          <GiSaveArrow size={28} className="m-2 mb-3" />
-        </Button>
-        <MyModal show={modalShow} setModalShow={setModalShow} />
-        {!token ? (
+        {token ? (
+          <>
+            <Button
+              variant="success"
+              onClick={() => {
+                setTimeout(() => {
+                  setModalShow(true);
+                  getOperations(userEmail)
+                }, 500);
+              }}
+            >
+              Add Operation
+              <GiSaveArrow size={28} className="m-2 mb-3" />
+            </Button>
+            <MyModal show={modalShow} setModalShow={setModalShow} />
+            <div className="d-flex justify-content-center aling-items-center">
+              <Filter setCurrentPage={setCurrentPage} />
+            </div>
+            <Button
+              variant="secondary"
+              href="/"
+              onClick={() => dispatch(logOut())}
+            >
+              Logout
+              <BiLogOut size={28} className="m-2 mb-3" />
+            </Button>
+          </>
+        ) : (
           <Button variant="info" href="/login">
             Login
             <BiLogIn size={28} className="m-2 mb-3" />
           </Button>
-        ) : (
-          <Button variant="secondary"  href="/" onClick={() => dispatch(logOut())}>
-            Logout
-            <BiLogOut size={28} className="m-2 mb-3" />
-          </Button>
         )}
-        <div className="d-flex justify-content-center aling-items-center">
-          <Filter setCurrentPage={setCurrentPage} />
-        </div>
       </Container>
     </Navbar>
   );
