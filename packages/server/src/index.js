@@ -12,7 +12,7 @@ env.config();
 
 app.use(cors());
 
-const connectionString = `mongodb+srv://${process.env.MONGO_DB_USER}:${process.env.MONGO_DB_PASSWORD}@${process.env.MONGO_DB_CLOUSTER}.ybv2n.mongodb.net/${process.env.MONGO_DB_DATABASE}?retryWrites=true&w=majority`;
+const connectionString = process.env.MONGO_CONNECTION_STRING;
 
 mongoose
   .connect(connectionString, {

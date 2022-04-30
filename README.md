@@ -4,6 +4,8 @@
 
 With this proyect in a mono repository. You can create a user and log in with Mongoose and access to your personal Budget where you can add income and outflow operations.
 
+To use it FIRST go to Login => Create an user and then you will be able to Sign In
+
 ## Starting
 
 1.  Fork the repository to have a copy of it in your accounts
@@ -12,22 +14,15 @@ With this proyect in a mono repository. You can create a user and log in with Mo
 4.  In `packeages/server` folder create a `.env` file like
 
 ```
-NODE_ENV= ==>> Here you should write `production` if you want to do deployment of backend
-
 PORT=
-MONGO_DB_USER=
-MONGO_DB_PASSWORD=
-MONGO_DB_CLOUSTER=
-MONGO_DB_DATABASE=
-JWT_SECRET=ANYONE
+MONGO_CONNECTION_STRING= ### => Here go mongo string connection with your app make sure you change it with you password and dabase correctly
+JWT_SECRET= ### => Here any word or numbers that you want
 ```
 
-5. In `packeages/server`, `packeages/server` and `Personal-Bodget` folders open a terminal, and white follow command:
+5. In `packeages/server`, `packeages/client` and `Personal-Budget` folders open a terminal, and white follow command:
    `npm install`
 
-6. Run `npm start` in `Personal-Bodget`
-
-### API https://rickandmortyapi.com/
+6. Run `npm start` in `Personal-Budget`
 
 ## Technologies:
 
