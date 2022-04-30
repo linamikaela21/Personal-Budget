@@ -20,11 +20,11 @@ export const CardBox = ({
 
   const deleteOp = (id) => {
     dispatch(deleteOperation(id));
-    setModalShow(false);
+    window.location.reload();
   };
 
-  const updateOp = async (id) => {
-    await dispatch(getOperationById(id));
+  const updateOp = (id) => {
+    dispatch(getOperationById(id));
     setTimeout(() => {
       setModalShow(true);
     }, 1000);
