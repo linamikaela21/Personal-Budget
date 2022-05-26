@@ -9,7 +9,7 @@ export const getOperations = (userEmail) => async (dispatch) => {
       method: "post",
       body: { userEmail },
     });
-    console.log("GET OPERATION ACTION", operations);
+    console.log(operations);
     return dispatch({
       type: productContants.GET_OPERATIONS,
       payload: operations,
@@ -58,6 +58,7 @@ export const addOperation = (operation) => async (dispatch) => {
       method: "post",
       body: {...operation},
     });
+    console.log(newOperation);
     return dispatch({
       type: productContants.ADD_OPERATION,
       payload: newOperation,

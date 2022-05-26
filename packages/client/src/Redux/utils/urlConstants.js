@@ -1,5 +1,4 @@
-export const URL_BASE =
-  `http://localhost:5000` || "lali-personal-budget.netlify.app";
+export const URL_BASE = "https://lali-personal-budget.herokuapp.com/server";
 
 export const URL_ALL_OPERATIONS = `${URL_BASE}/budget`;
 

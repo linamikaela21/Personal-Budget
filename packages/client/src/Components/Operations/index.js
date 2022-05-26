@@ -11,7 +11,7 @@ export const Operations = ({
 }) => {
   const dispatch = useDispatch();
   const operations = useSelector((state) => state.operations);
-  const token = localStorage.getItem("token");
+  const token = sessionStorage.getItem("token");
   const userEmail = useSelector((state) => state.user.email);
   const operationFiltered = useSelector((state) => state.operationFiltered);
 

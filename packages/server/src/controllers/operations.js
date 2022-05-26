@@ -4,11 +4,13 @@ const User = require("../models/User");
 exports.getOperations = async (req, res) => {
   User.findOne({ email: req.body.userEmail }).exec(async (err, user) => {
     if (err) {
+      console.log('BUUUU',err);
       return res.status(400).json({ err });
     } else if (user) {
       const budgets = await Budget.find({
-        userEmail: { $all: [`${user.email}`] },
+        userEmail: { $all: [`${user?.email}`] },
       });
+      console.log('BUUUU',budgets);
       res.status(200).send(budgets);
     }
   });

@@ -1,5 +1,5 @@
 export const fetchData = async ({ url, method, body, params = '' }) => {
-  const token = localStorage.getItem("token");
+  const token = sessionStorage.getItem("token");
   const data = await fetch(url, {
     headers: new Headers({
       'Authorization': token ? `Bearer ${token}` : "",

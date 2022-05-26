@@ -8,7 +8,7 @@ export const App = () => {
   const currentUser = useSelector(state => state.user);
 
   useEffect(() => {
-    if(currentUser.length > 1) {
+    if(currentUser.length) {
       dispatch(isUserLoggedIn());
     }
   }, [dispatch, currentUser]);

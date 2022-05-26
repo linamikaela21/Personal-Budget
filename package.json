@@ -1,8 +1,10 @@
 {
-  "name": "PersonalBudget",
+  "name": "personal-budget",
   "version": "1.0.0",
   "scripts": {
-    "start": "lerna run start --stream"
+    "install": "cd packages && cd client && npm install && cd ../server && npm install",
+    "start": "lerna run start --stream",
+    "build": "cd packages && cd client && npm run build && cd ../server && npm run build"
   },
   "author": "Linamikaela21",
   "devDependencies": {
